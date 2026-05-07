@@ -1,0 +1,40 @@
+schema: 1
+story: '1.1'
+story_title: 'Estrutura HTML Semântica e Layout CSS Grid'
+gate: PASS
+status_reason: 'Todos os 10 ACs implementados corretamente. Estrutura HTML5 semântica completa, 19 botões com data-value/aria-label, scaffolding CSS e JS corretos. Discrepância de redação no AC #6 documentada e aceita.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-05-07T00:00:00Z'
+
+top_issues: []
+waiver: { active: false }
+
+quality_score: 98
+expires: '2026-05-21T00:00:00Z'
+
+evidence:
+  tests_reviewed: 5
+  risks_identified: 1
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'defer no script, sem inline JS, estrutura segura'
+  performance:
+    status: PASS
+    notes: 'HTML estático, zero requests desnecessários'
+  reliability:
+    status: PASS
+    notes: 'Estrutura semântica correta, fallback de fonte presente'
+  maintainability:
+    status: PASS
+    notes: 'Classes semânticas, aria-labels, data-values claros'
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Corrigir redação do AC #6 para dizer 19 botões (1 button element para o 0 que faz span 2)'
+      refs: ['docs/stories/1.1.html-structure.story.md']

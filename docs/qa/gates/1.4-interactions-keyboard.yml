@@ -1,0 +1,42 @@
+schema: 1
+story: '1.4'
+story_title: 'Interações, Animações e Suporte a Teclado'
+gate: PASS
+status_reason: 'Todos os 10 ACs implementados. CSS :active + .active idênticos. @keyframes pow-show com translate(-50%,-50%) preservado em todos os frames. animationend com {once:true} não-bloqueante. handleKeyboard com keyMap completo, conversões * → × e / → ÷, e.preventDefault() para /. handleBackspace com guards corretos.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-05-07T00:00:00Z'
+
+top_issues: []
+waiver: { active: false }
+
+quality_score: 100
+expires: '2026-05-21T00:00:00Z'
+
+evidence:
+  tests_reviewed: 14
+  risks_identified: 1
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'Keyboard input passa pelo keyMap estático — apenas ações permitidas são executadas. Nenhum input livre do teclado é inserido no DOM diretamente.'
+  performance:
+    status: PASS
+    notes: 'will-change: transform no .pow-animation. animationend com {once:true} previne acúmulo de listeners. setTimeout de 100ms para feedback visual é mínimo. CSS-only animation sem JS overhead.'
+  reliability:
+    status: PASS
+    notes: 'void pow.offsetWidth força reflow antes de readicionar .show-pow — garante restart da animação. {once:true} elimina memory leak de listeners acumulados. e.preventDefault() para / previne Firefox quick find.'
+  maintainability:
+    status: PASS
+    notes: 'keyMap como objeto declarativo — fácil de estender. dataValue map para feedback visual separado da lógica. Comentários descritivos nas conversões obrigatórias.'
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Testar manualmente em Firefox (tecla / não deve abrir quick find, * deve calcular)'
+      refs: ['script.js', 'index.html']
+    - action: 'Testar POW! em sequência rápida de = consecutivos para verificar não-bloqueio'
+      refs: ['script.js']

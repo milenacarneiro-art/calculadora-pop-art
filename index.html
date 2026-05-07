@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POW! CALC!</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="calculator-wrapper">
+    <h1 class="title">POW! CALC!</h1>
+    <div class="calculator">
+      <div class="display">
+        <div id="expression"></div>
+        <div id="result">0</div>
+      </div>
+      <div class="pow-animation">POW!</div>
+      <div class="buttons">
+        <button class="btn-clear"   data-value="AC"  aria-label="Clear all">AC</button>
+        <button class="btn-special" data-value="+/-" aria-label="Toggle sign">+/−</button>
+        <button class="btn-special" data-value="%"   aria-label="Percent">%</button>
+        <button class="btn-operator" data-value="÷"  aria-label="Divide">÷</button>
+
+        <button class="btn-number"  data-value="7"   aria-label="Seven">7</button>
+        <button class="btn-number"  data-value="8"   aria-label="Eight">8</button>
+        <button class="btn-number"  data-value="9"   aria-label="Nine">9</button>
+        <button class="btn-operator" data-value="×"  aria-label="Multiply">×</button>
+
+        <button class="btn-number"  data-value="4"   aria-label="Four">4</button>
+        <button class="btn-number"  data-value="5"   aria-label="Five">5</button>
+        <button class="btn-number"  data-value="6"   aria-label="Six">6</button>
+        <button class="btn-operator" data-value="-"  aria-label="Subtract">−</button>
+
+        <button class="btn-number"  data-value="1"   aria-label="One">1</button>
+        <button class="btn-number"  data-value="2"   aria-label="Two">2</button>
+        <button class="btn-number"  data-value="3"   aria-label="Three">3</button>
+        <button class="btn-operator" data-value="+"  aria-label="Add">+</button>
+
+        <button class="btn-number btn-zero" data-value="0" aria-label="Zero">0</button>
+        <button class="btn-number"  data-value="."   aria-label="Decimal point">.</button>
+        <button class="btn-equals"  data-value="="   aria-label="Equals">=</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
