@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POW! CALC!</title>
+  <!-- Google Fonts: preconnect async (evita render-blocking do @import) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -13,7 +17,7 @@
     <div class="calculator">
       <div class="display">
         <div id="expression"></div>
-        <div id="result">0</div>
+        <div id="result" aria-live="polite" aria-atomic="true">0</div>
       </div>
       <div class="pow-animation">POW!</div>
       <div class="buttons">

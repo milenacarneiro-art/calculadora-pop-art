@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
 /* =============================================
    CALCULADORA POP ART — style.css
@@ -14,6 +13,8 @@
   --blue: #0044FF;
   --black: #000000;
   --white: #ffffff;
+  --bg: #1A1A1A;
+  --expression-color: #555555;
   --shadow-offset: 6px 6px 0px var(--black);
   --btn-shadow: 3px 3px 0px var(--black);
   --border: 3px solid var(--black);
@@ -32,11 +33,11 @@ body {
   font-family: 'Bangers', Impact, fantasy;
   text-transform: uppercase;
 
-  /* Ben-Day dots: pontos azuis sobre fundo amarelo — CSS puro, zero imagens externas */
-  background-color: var(--yellow);
+  /* Ben-Day dots: pontos amarelos sobre fundo grafite escuro — Opção C Dark Pop Art */
+  background-color: var(--bg);
   background-image: radial-gradient(
     circle,
-    var(--blue) 15%,
+    rgba(255, 230, 0, 0.40) 15%,
     transparent 15%
   );
   background-size: 20px 20px;
@@ -61,7 +62,7 @@ body {
 h1.title {
   font-family: 'Bangers', Impact, fantasy;
   font-size: 48px;
-  color: var(--white);
+  color: var(--yellow);
   text-align: center;
   letter-spacing: 4px;
   -webkit-text-stroke: 2px var(--black);
@@ -78,7 +79,7 @@ h1.title {
 .calculator {
   background: var(--white);
   border: var(--border-thick);
-  box-shadow: var(--shadow-offset);
+  box-shadow: 6px 6px 0px rgba(255, 255, 255, 0.25); /* sombra clara — visível no fundo escuro */
   border-radius: 4px;
   position: relative;   /* necessário para o POW! absoluto */
   overflow: visible;
@@ -96,7 +97,7 @@ h1.title {
 #expression {
   font-family: 'Bangers', Impact, fantasy;
   font-size: 20px;
-  color: #555;
+  color: var(--expression-color);
   min-height: 28px;
   letter-spacing: 1px;
   word-break: break-all;
@@ -151,6 +152,13 @@ h1.title {
 .buttons button.active {
   transform: translate(3px, 3px);
   box-shadow: 0px 0px 0px var(--black);
+}
+
+/* Focus visível para navegação por teclado (WCAG 2.4.7) */
+.buttons button:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+  z-index: 1; /* garante que o outline não é cortado pelo botão adjacente */
 }
 
 /* --- Variantes de Botão --- */
@@ -213,4 +221,23 @@ h1.title {
   60%  { transform: translate(-50%, -50%) scale(1.2) rotate(5deg); opacity: 1; }
   80%  { transform: translate(-50%, -50%) scale(1.0) rotate(-2deg); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); opacity: 0; }
+}
+
+/* --- Reduced Motion: respeita preferência do sistema --- */
+@media (prefers-reduced-motion: reduce) {
+  /* Remove transições de botão */
+  .buttons button {
+    transition: none;
+  }
+
+  /* Desativa animação POW! — substitui por fade simples e rápido */
+  @keyframes pow-show {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+    50%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  .pow-animation.show-pow {
+    animation-duration: 0.4s;
+  }
 }
