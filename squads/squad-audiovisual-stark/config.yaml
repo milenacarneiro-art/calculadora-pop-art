@@ -1,0 +1,131 @@
+squad:
+  name: squad-audiovisual-stark
+  version: 1.0.0
+  short-title: Audiovisual Stark Squad
+  description: >-
+    Squad especializado em design criativo para agências de comunicação e equipes
+    audiovisuais. Cobre estratégia de marca, direção de arte, identidade visual,
+    UX/UI, design social, motion design, landing pages e crítica de design.
+    Baseado nas metodologias dos maiores praticantes da área.
+  author: Milena / Stark
+  icon: "🎨"
+  entry_agent: studio-chief
+  slashPrefix: audiovisualStark
+
+workspace_integration:
+  level: read_write
+  rationale: "Lê contexto de marca/projeto do workspace e escreve artefatos de design (briefs, guias, specs)"
+  read_paths:
+    - workspace/businesses/{brand}/company/
+    - workspace/businesses/{brand}/brand/
+    - workspace/businesses/{brand}/marketing/
+  write_paths:
+    - workspace/businesses/{brand}/brand/
+    - workspace/businesses/{brand}/design/
+    - workspace/businesses/{brand}/marketing/
+  template_namespace: audiovisual
+
+# Pattern Library
+pattern_library:
+  prefix: AS
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "AS-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Padrões para estrutura e execução de tarefas criativas"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Padrões para seleção de executor por tipo de tarefa"
+    - id: PP
+      name: "Process Patterns"
+      description: "Padrões para fluxos de trabalho criativos"
+    - id: IP
+      name: "Integration Patterns"
+      description: "Padrões para integrações com ferramentas de design"
+    - id: DP
+      name: "Documentation Patterns"
+      description: "Padrões para documentação de diretrizes e guias"
+  patterns: []
+
+# Task Standards
+task_standards:
+  enforce_anatomy: true
+  validator: "AS-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+    - handoff
+
+# Executor Types
+executor_types:
+  human:
+    id: "AS-EP-001"
+    name: "Human Executor"
+    characteristics: [judgment, creativity, relationships]
+    cost: "$$$"
+    speed: slow
+    use_for:
+      - "Decisões estratégicas de marca"
+      - "Aprovação de identidade visual"
+      - "Negociação com clientes"
+  agent:
+    id: "AS-EP-002"
+    name: "Agent Executor (AI)"
+    characteristics: [analysis, generation, pattern_recognition]
+    cost: "$$$$"
+    speed: fast
+    use_for:
+      - "Geração de conceitos criativos"
+      - "Análise de brief"
+      - "Criação de copy e naming"
+  hybrid:
+    id: "AS-EP-003"
+    name: "Hybrid Executor"
+    characteristics: [ai_assisted, human_validated]
+    cost: "$$"
+    speed: moderate
+    use_for:
+      - "Revisão de identidade visual"
+      - "Validação de UX"
+      - "Auditoria de design"
+  worker:
+    id: "AS-EP-004"
+    name: "Worker Executor"
+    characteristics: [deterministic, api_integration, file_operations]
+    cost: "$"
+    speed: very_fast
+    use_for:
+      - "Geração de variações de assets"
+      - "Exportação de formatos"
+      - "Automação de templates"
+
+executor_selection:
+  requires_creativity: human
+  requires_judgment: [human, hybrid]
+  requires_speed: [agent, worker]
+  requires_consistency: worker
+  requires_validation: hybrid
+  requires_learning: agent
+
+# Workflow Configuration
+workflow_config:
+  checkpoint_policy: always_active
+  checkpoint_modes:
+    always_active: "Every checkpoint MUST pass"
+    skip_on_override: "Can skip with manual approval"
+    advisory: "Only alerts, doesn't block"
+  fail_fast: true
+  allow_manual_override: false
