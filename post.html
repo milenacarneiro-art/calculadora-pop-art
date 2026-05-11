@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Post Instagram — Calculadora Pop Art</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════
+       POST RESET
+    ═══════════════════════════════════════ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 540px; height: 675px;
+      overflow: hidden;
+      background: #FFE600;
+    }
+
+    /* ═══════════════════════════════════════
+       POST LAYOUT  (540 × 675 — 4:5 Instagram)
+    ═══════════════════════════════════════ */
+    .post {
+      width: 540px; height: 675px;
+      background-color: #FFE600;
+      background-image: radial-gradient(circle, rgba(0,68,255,0.38) 2.5px, transparent 2.5px);
+      background-size: 18px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px 38px;
+      position: relative;
+    }
+
+    /* decorative stars */
+    .star {
+      position: absolute;
+      font-style: normal;
+      color: #000;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .star-1 { font-size: 30px; top: 16px; right: 20px; transform: rotate(18deg); }
+    .star-2 { font-size: 18px; top: 86px; left: 12px; transform: rotate(-12deg); }
+    .star-3 { font-size: 20px; bottom: 80px; right: 14px; transform: rotate(22deg); }
+
+    /* headline badge */
+    .headline {
+      font-family: 'Bangers', cursive;
+      font-size: 42px;
+      letter-spacing: 3px;
+      color: #FFE600;
+      background: #FF0044;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0 #000;
+      padding: 4px 20px 2px;
+      transform: rotate(-1.5deg);
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    /* subtitle strip */
+    .subtitle {
+      font-family: 'Bangers', cursive;
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: #000;
+      background: #fff;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0 #000;
+      padding: 4px 18px 2px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    /* footer pill */
+    .footer {
+      font-family: 'Bangers', cursive;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      color: #FFE600;
+      background: #000;
+      padding: 3px 16px 2px;
+      border-radius: 30px;
+      z-index: 10;
+    }
+
+    /* ═══════════════════════════════════════
+       CALCULATOR EMBED
+       Dimensionado nativamente para 250×348px
+       sem transform — html2canvas compatível
+    ═══════════════════════════════════════ */
+    .calc-outer {
+      width: 250px;
+      border: 5px solid #000;
+      box-shadow: 10px 10px 0 #000;
+      overflow: hidden;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    /* background escuro estilo calculator body */
+    .calc-inner {
+      font-family: 'Bangers', Impact, fantasy;
+      text-transform: uppercase;
+      background-color: #1A1A1A;
+      background-image: radial-gradient(circle, rgba(255,230,0,0.40) 15%, transparent 15%);
+      background-size: 16px 16px;
+      background-position: 0 0;
+      width: 250px;
+      padding: 10px 12px;
+    }
+
+    .calc-inner .calculator-wrapper {
+      width: 100%;
+    }
+
+    .calc-inner .calculator {
+      background: #fff;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0 rgba(255,255,255,0.20);
+      border-radius: 3px;
+      width: 100%;
+    }
+
+    /* display area */
+    .calc-inner .display {
+      border-bottom: 3px solid #000;
+      background: #fff;
+      text-align: right;
+      padding: 8px 12px 5px;
+    }
+    .calc-inner .display .expr {
+      font-family: 'Bangers', Impact, fantasy;
+      font-size: 14px;
+      color: #555;
+      min-height: 18px;
+      letter-spacing: 1px;
+    }
+    .calc-inner .display .res {
+      font-family: 'Bangers', Impact, fantasy;
+      font-size: 30px;
+      color: #000;
+      min-height: 36px;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+
+    /* button grid — dimensionado para 226px (250 - 12×2 padding) */
+    .calc-inner .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .calc-inner .buttons button {
+      font-family: 'Bangers', Impact, fantasy;
+      font-size: 17px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 4px;
+      border: 1.5px solid #000;
+      cursor: default;
+      outline: none;
+      box-shadow: inset -1px -1px 0 rgba(0,0,0,0.20);
+    }
+    .calc-inner .btn-number   { background: #FFE600; color: #000; }
+    .calc-inner .btn-operator { background: #FF0044; color: #fff; }
+    .calc-inner .btn-equals   { background: #0044FF; color: #fff; }
+    .calc-inner .btn-clear,
+    .calc-inner .btn-special  { background: #000;    color: #fff; }
+    .calc-inner .btn-zero     { grid-column: span 2; }
+  </style>
+</head>
+<body>
+  <div class="post">
+    <i class="star star-1">✦</i>
+    <i class="star star-2">✦</i>
+    <i class="star star-3">✦</i>
+
+    <!-- headline -->
+    <div class="headline">POW! CALC IS LIVE.</div>
+
+    <!-- calculator embedded inline (no iframe) -->
+    <div class="calc-outer">
+      <div class="calc-inner">
+        <div class="calculator-wrapper">
+          <div class="calculator">
+            <div class="display">
+              <div class="expr">7 × 8</div>
+              <div class="res">56</div>
+            </div>
+            <div class="buttons">
+              <button class="btn-clear"   >AC</button>
+              <button class="btn-special" >+/−</button>
+              <button class="btn-special" >%</button>
+              <button class="btn-operator">÷</button>
+
+              <button class="btn-number"  >7</button>
+              <button class="btn-number"  >8</button>
+              <button class="btn-number"  >9</button>
+              <button class="btn-operator">×</button>
+
+              <button class="btn-number"  >4</button>
+              <button class="btn-number"  >5</button>
+              <button class="btn-number"  >6</button>
+              <button class="btn-operator">−</button>
+
+              <button class="btn-number"  >1</button>
+              <button class="btn-number"  >2</button>
+              <button class="btn-number"  >3</button>
+              <button class="btn-operator">+</button>
+
+              <button class="btn-number btn-zero">0</button>
+              <button class="btn-number"  >.</button>
+              <button class="btn-equals"  >=</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- subtitle -->
+    <div class="subtitle">CÓDIGO + DESIGN. 100% FUNCIONAL.</div>
+
+    <!-- footer -->
+    <div class="footer">TREINAMENTO AUDIOVISUAL STARK · 2026</div>
+  </div>
+</body>
+</html>
