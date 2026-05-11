@@ -250,10 +250,12 @@ operational_frameworks:
     routing_table:
       brand_identity: "@brief-analyst → @brand-strategist → @identity-designer → @design-critic"
       social_media: "@brief-analyst → @art-director → @social-designer → @design-critic"
+      social_media_with_image: "@brief-analyst → @art-director → @social-designer → @image-generator → @design-critic"
       landing_page: "@brief-analyst → @ux-ui-designer → @landing-designer → @design-critic"
       motion_graphics: "@brief-analyst → @art-director → @motion-designer → @design-critic"
       full_project: "@brief-analyst → @brand-strategist → @art-director → [specialists] → @design-critic"
       audit: "@brief-analyst → @design-critic → [relevant specialists]"
+      image_generation: "@social-designer (spec) → @image-generator → @design-critic"
 
   framework_3:
     name: "Quality Gate Protocol"
