@@ -251,8 +251,8 @@ database_checks:
       - "Server=.*;Password=.*"
       - "jdbc:[^;]+password=[^;]+"
     examples:
-      - "postgres://user:password@localhost:5432/db"
-      - "mongodb://admin:secret@cluster.mongodb.net"
+      - "postgres://[USER]:[PASSWORD]@localhost:5432/db"
+      - "mongodb://[USER]:[PASSWORD]@cluster.mongodb.net"
     severity: BLOCKING
 
   - id: "SEC-012"
